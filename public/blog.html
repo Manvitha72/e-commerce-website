@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Final Website</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="src/blog_style.css" />
+    <link rel="stylesheet" href="src/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+  </head>
+  <body ng-controller="myCtrl">
+    <div class="header">
+      <div class="logo">
+        <img src="images/logo.jpg" alt="Nature Essence Logo" />
+      </div>
+      <div class="links">
+        <a href="home.html">Redirect to Home</a>
+      </div>
+    </div>
+    <section id="blog">
+      <div class="blog-heading">
+        <span>Facts and FAQs</span>
+        <h3>Blog Page</h3>
+        <input
+          type="text"
+          ng-model="searchText"
+          placeholder="Search for blogs..."
+          class="search-bar"/>
+      </div>
+      <div class="blog-container">
+        <div
+          class="blog-box"
+          ng-repeat="blog in filteredBlogs = (blogs | filter:searchText)">
+          <div class="blog-img">
+            <img ng-src="{{blog.image}}" alt="{{blog.title}}" />
+          </div>
+          <div class="blog-text">
+            <h3 class="blog-title">{{blog.title}}</h3>
+            <p>{{blog.content | limitTo: blog.limit}}...<span ng-show="blog.showMore">
+              {{blog.content.substr(blog.limit)}}</span><a href="#" ng-click="toggleReadMore(blog)">
+              {{blog.showMore ? 'read less' : 'read more'}}</a></p>
+          </div>
+        </div>
+        <div class="no-results" ng-if="filteredBlogs.length === 0">
+          No blogs found matching '{{searchText}}'.
+        </div>
+      </div>
+    </section>
+    <script>
+      var app = angular.module("myApp", []);
+      app.controller("myCtrl", function ($scope) {
+        $scope.blogs = [
+          {
+            title: "What are the benefits of using natural skincare products?",
+            content:
+              "Using natural skincare products can benefit your skin in numerous ways. They are free from harsh chemicals and artificial ingredients, making them gentler and safer for all skin types. Natural ingredients are rich in vitamins, antioxidants, and minerals that nourish and rejuvenate the skin, promoting a youthful glow and improving overall skin health.",
+            image: "images/blog1.jpg",
+            limit: 60,
+            showMore: false,
+          },
+          {
+            title: "How can I determine my skin type?",
+            content:
+              "There are four main skin types: oily, dry, combination, and normal. Oily skin is prone to excess sebum production and shine, while dry skin lacks moisture and may feel tight or flaky. Combination skin exhibits characteristics of both oily and dry skin, with oiliness in certain areas and dryness in others. Normal skin is well-balanced and neither too oily nor too dry.",
+              image: "images/blog2.jpg",
+            limit: 60,
+            showMore: false,
+          },
+          {
+            title: " What is the importance of a skincare routine?",
+            content:
+              "A consistent skincare routine is crucial for maintaining healthy, glowing skin. It helps cleanse, hydrate, and protect the skin from environmental damage, aging, and other concerns. A basic skincare routine typically includes cleansing, toning, moisturizing, and sun protection, tailored to your skin type and specific needs.",
+              image: "images/blog3.jpg",
+            limit: 60,
+            showMore: false,
+          },
+          {
+            title: "How do I choose the right products for my skin concerns?",
+            content:
+              "When selecting skincare products, it's essential to consider your skin type and any specific concerns you want to address. Look for products formulated with ingredients known to target your particular skin issues, whether it's acne, aging, hyperpigmentation, or sensitivity. Consulting with a skincare professional or dermatologist can also provide valuable guidance in choosing the right products for your skin.",
+              image: "images/blog4.jpg",
+            limit: 60,
+            showMore: false,
+          },
+          {
+            title: "What are some essential skincare ingredients to look for?",
+            content:
+              "There are many skincare ingredients with various benefits for the skin. Some popular and effective ingredients to look for in skincare products include hyaluronic acid for hydration, retinol for anti-aging, vitamin C for brightening and antioxidant protection, niacinamide for calming and balancing, and glycolic acid for exfoliation and skin renewal.",
+            image: "images/blog5.jpeg",
+            limit: 60,
+            showMore: false,
+          },
+          {
+            title: "What are some common skincare mistakes to avoid?",
+            content:
+              "Avoiding common skincare mistakes can help prevent skin problems and maintain optimal skin health. Some common mistakes include using harsh or drying products that strip the skin's natural moisture barrier, over-exfoliating, skipping sunscreen, sleeping with makeup on, and not properly removing makeup and impurities before bed.",
+            image: "images/blog6.jpg",
+            limit: 60,
+            showMore: false,
+          },
+          {
+            title: "How often should I exfoliate my skin?",
+            content:
+                "Exfoliation is an essential step in any skincare routine to remove dead skin cells, unclog pores, and promote cell turnover for smoother, brighter skin. However, it's crucial not to overdo it, as excessive exfoliation can irritate the skin and lead to sensitivity and inflammation. Depending on your skin type and tolerance, exfoliating one to three times per week is generally recommended.",
+            image: "images/blog7.jpeg",
+            limit: 60,
+            showMore: false,
+          },
+          {
+            title: "What are the benefits of using face masks?",
+            content:
+              "Face masks are a popular skincare treatment that offers various benefits depending on the type of mask used. They can help hydrate, detoxify, exfoliate, brighten, and tighten the skin, depending on their ingredients and formulation. Incorporating face masks into your skincare routine can give your skin an extra boost and address specific concerns for a more radiant complexion.",
+            image: "images/blog8.jpg",
+            limit: 60,
+            showMore: false,
+          },
+          {
+            title: "How can I achieve glowing skin naturally?",
+            content:
+              "Achieving glowing skin naturally involves adopting a holistic approach to skincare and overall wellness. This includes using gentle and nourishing skincare products, staying hydrated, eating a healthy diet, getting regular exercise, managing stress, getting enough sleep, and protecting your skin from environmental damage. Consistency and patience are key, as healthy, radiant skin is a result of long-term care and maintenance.",
+            image: "images/blog9.jpg",
+            limit: 60,
+            showMore: false,
+          }
+        ];
+
+        $scope.toggleReadMore = function (blog) {
+          blog.showMore = !blog.showMore;
+          if (blog.showMore) {
+            blog.limit = blog.content.length;
+          } else {
+            blog.limit = 60;
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
